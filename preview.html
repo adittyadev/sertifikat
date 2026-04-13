@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Preview Sertifikat</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+
+  <body style="background: #f4f4f4; padding: 30px; text-align: center">
+    <div id="sertifikat">
+      <!-- Dekorasi -->
+      <div class="deco-left"></div>
+      <div class="deco-right"></div>
+      <div class="cert-inner"></div>
+      <div class="cert-inner-2"></div>
+      <div class="watermark">BPSDM</div>
+
+      <!-- Header -->
+      <div class="cert-header">
+        <img src="a40b057f1de9d1878db42e8d95f318e8.jpg" style="width: 120px" />
+        <img src="Coat_of_arms_West_Sumatera.png" style="width: 70px" />
+
+        <div style="text-align: right; font-size: 11px">
+          <b>Badan Pengembangan<br />Sumber Daya Manusia</b><br />
+          <span style="font-size: 10px">Provinsi Sumatera Barat</span>
+        </div>
+      </div>
+
+      <div class="cert-divider"></div>
+
+      <div class="cert-title-area">
+        <div class="big-title">SERTIFIKAT</div>
+      </div>
+
+      <div class="cert-nomor" id="c-nomor"></div>
+
+      <div style="text-align: center; font-size: 11.5px">
+        Kepala Badan Pengembangan Sumber Daya Manusia Provinsi Sumatera
+        Barat,<br />
+        <b>dengan ini memberikan sertifikat kepada:</b>
+      </div>
+
+      <div class="cert-body">
+        <div class="cert-row">
+          <div class="cert-label">Nama</div>
+          <div class="cert-colon">:</div>
+          <div class="cert-value name" id="c-nama"></div>
+        </div>
+
+        <div class="cert-row">
+          <div class="cert-label">NIP</div>
+          <div class="cert-colon">:</div>
+          <div class="cert-value" id="c-nip"></div>
+        </div>
+
+        <div class="cert-row">
+          <div class="cert-label">Jabatan</div>
+          <div class="cert-colon">:</div>
+          <div class="cert-value" id="c-jabatan"></div>
+        </div>
+
+        <div class="cert-row">
+          <div class="cert-label">Instansi</div>
+          <div class="cert-colon">:</div>
+          <div class="cert-value" id="c-instansi"></div>
+        </div>
+      </div>
+
+      <div class="cert-kegiatan" id="c-kegiatan"></div>
+
+      <div class="cert-footer">
+        <div class="qr-placeholder">QR</div>
+
+        <div class="sign-block">
+          <div id="c-tgl"></div>
+          <div>Kepala Badan Pengembangan Sumber Daya Manusia</div>
+          <div style="margin: 28px 0 2px">
+            <div class="sign-name">Dr. Ir. Desniarti, M.M.</div>
+          </div>
+          <div>Pembina Utama Muda, IV/c</div>
+          <div>NIP. 19650824 199003 2 001</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button onclick="downloadPDF()">Download PDF</button>
+      <button onclick="window.location.href = 'index.html'">Kembali</button>
+    </div>
+
+    <script>
+      const data = JSON.parse(localStorage.getItem("sertifikat"));
+
+      document.getElementById("c-nomor").innerText = "No : " + data.nomor;
+      document.getElementById("c-nama").innerText = data.nama;
+      document.getElementById("c-nip").innerText = data.nip;
+      document.getElementById("c-jabatan").innerText = data.jabatan;
+      document.getElementById("c-instansi").innerText = data.instansi;
+
+      document.getElementById("c-kegiatan").innerHTML =
+        `Pada kegiatan <b>${data.kegiatan}</b><br>
+Pada tanggal <b>${data.tanggal}</b>`;
+
+      document.getElementById("c-tgl").innerText = "Padang, " + data.tanggal;
+
+      async function downloadPDF() {
+        const el = document.getElementById("sertifikat");
+        const canvas = await html2canvas(el, { scale: 2 });
+
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF("landscape", "mm", "a4");
+
+        pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, 297, 210);
+        pdf.save("sertifikat.pdf");
+      }
+    </script>
+  </body>
+</html>

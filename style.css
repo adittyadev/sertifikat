@@ -1,0 +1,272 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.container {
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 540px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+  font-size: 20px;
+  color: #1a3a6b;
+  margin-bottom: 4px;
+}
+
+.sub {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.form-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  color: #444;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #1a3a6b;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #1a3a6b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #c9a227;
+  color: #111;
+}
+
+/* ===== SERTIFIKAT (preview.html) ===== */
+
+#sertifikat {
+  width: 960px;
+  height: 620px;
+  background: white;
+  position: relative;
+  overflow: hidden;
+  font-family: "Times New Roman", serif;
+  border: 2px solid #ccc;
+}
+
+.deco-left,
+.deco-right {
+  position: absolute;
+  top: 0;
+  width: 28px;
+  height: 100%;
+  background: linear-gradient(to bottom, #1a3a6b, #2563a8, #1a3a6b);
+}
+.deco-left {
+  left: 0;
+}
+.deco-right {
+  right: 0;
+}
+
+.cert-inner {
+  position: absolute;
+  top: 14px;
+  left: 42px;
+  right: 42px;
+  bottom: 14px;
+  border: 2px solid #c9a227;
+}
+
+.cert-inner-2 {
+  position: absolute;
+  top: 19px;
+  left: 47px;
+  right: 47px;
+  bottom: 19px;
+  border: 0.5px solid #c9a227;
+}
+
+.watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 90px;
+  color: rgba(200, 170, 50, 0.1);
+  font-weight: bold;
+  pointer-events: none;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.cert-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 30px 6px;
+  position: relative;
+  z-index: 2;
+}
+
+.cert-divider {
+  width: calc(100% - 60px);
+  margin: 0 30px;
+  height: 1.5px;
+  background: linear-gradient(to right, #c9a227, #f5e07a, #c9a227);
+  position: relative;
+  z-index: 2;
+}
+
+.cert-title-area {
+  text-align: center;
+  padding: 8px 30px 4px;
+  position: relative;
+  z-index: 2;
+}
+
+.big-title {
+  font-size: 44px;
+  font-weight: bold;
+  letter-spacing: 6px;
+  color: #1a3a6b;
+}
+
+.cert-nomor {
+  text-align: center;
+  font-size: 11.5px;
+  color: #222;
+  margin: 2px 0 4px;
+  position: relative;
+  z-index: 2;
+}
+
+.cert-body {
+  padding: 0 50px;
+  position: relative;
+  z-index: 2;
+}
+
+.cert-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 3px;
+  font-size: 13px;
+  color: #111;
+}
+
+.cert-label {
+  width: 90px;
+  font-weight: bold;
+  font-style: italic;
+  flex-shrink: 0;
+}
+.cert-colon {
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.cert-value {
+  border-bottom: 1px solid #555;
+  flex: 1;
+  padding-bottom: 1px;
+  min-height: 18px;
+}
+.cert-value.name {
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 2px solid #333;
+}
+
+.cert-kegiatan {
+  text-align: center;
+  font-size: 12px;
+  padding: 6px 30px 0;
+  color: #111;
+  position: relative;
+  z-index: 2;
+  line-height: 1.6;
+}
+
+.cert-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 4px 50px 10px;
+  position: relative;
+  z-index: 2;
+  gap: 14px;
+}
+
+.sign-block {
+  text-align: center;
+  font-size: 10.5px;
+  color: #111;
+}
+.sign-name {
+  font-weight: bold;
+  font-style: italic;
+  text-decoration: underline;
+  font-size: 12px;
+}
+
+.qr-placeholder {
+  width: 70px;
+  height: 70px;
+  border: 1px solid #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  color: #888;
+}
+
+.btn-group {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-group button {
+  width: auto;
+  padding: 10px 28px;
+  margin: 0 6px;
+  font-size: 14px;
+}

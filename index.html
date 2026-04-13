@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Form Sertifikat BPSDM</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Generator Sertifikat</h2>
+      <p class="sub">BPSDM Provinsi Sumatera Barat</p>
+
+      <div class="form-card">
+        <div class="form-group">
+          <label>Nama</label>
+          <input type="text" id="nama" placeholder="Nama lengkap" />
+        </div>
+        <div class="form-group">
+          <label>NIP</label>
+          <input type="text" id="nip" placeholder="Nomor Induk Pegawai" />
+        </div>
+        <div class="form-group">
+          <label>Jabatan</label>
+          <input type="text" id="jabatan" placeholder="Jabatan" />
+        </div>
+        <div class="form-group">
+          <label>Instansi</label>
+          <input type="text" id="instansi" placeholder="Nama instansi" />
+        </div>
+        <div class="form-group">
+          <label>Nama Kegiatan</label>
+          <input
+            type="text"
+            id="kegiatan"
+            placeholder="Kamis Belajar Series 74"
+          />
+        </div>
+        <div class="form-group">
+          <label>Tanggal Kegiatan</label>
+          <input type="date" id="tanggal" />
+        </div>
+      </div>
+
+      <button onclick="kirimData()">Generate Sertifikat</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

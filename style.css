@@ -5,85 +5,294 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
+  font-family: "DM Sans", Arial, sans-serif;
+  min-height: 100vh;
   display: flex;
+  align-items: center;
   justify-content: center;
   padding: 40px 16px;
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(26, 58, 107, 0.07) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(201, 162, 39, 0.06) 0%,
+      transparent 50%
+    ),
+    #f7f6f1;
 }
 
 .container {
   background: white;
-  padding: 32px;
-  border-radius: 12px;
   width: 100%;
-  max-width: 540px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    0 8px 40px rgba(26, 58, 107, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-h2 {
-  font-size: 20px;
-  color: #1a3a6b;
-  margin-bottom: 4px;
+/* HEADER */
+.card-header {
+  background: #1a3a6b;
+  padding: 32px 36px 28px;
+  position: relative;
+  overflow: hidden;
 }
 
-.sub {
+.card-header::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid rgba(201, 162, 39, 0.25);
+}
+
+.card-header::after {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 162, 39, 0.12);
+}
+
+.header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(201, 162, 39, 0.15);
+  border: 1px solid rgba(201, 162, 39, 0.3);
+  border-radius: 100px;
+  padding: 5px 12px;
+  margin-bottom: 14px;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  background: #c9a227;
+  border-radius: 50%;
+}
+
+.badge-text {
+  font-size: 11px;
+  font-weight: 500;
+  color: #c9a227;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.card-header h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 26px;
+  color: white;
+  line-height: 1.25;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.card-header p {
   font-size: 13px;
-  color: #666;
-  margin-bottom: 24px;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 300;
+  position: relative;
+  z-index: 1;
 }
 
-.form-card {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+.gold-bar {
+  height: 3px;
+  background: linear-gradient(90deg, #c9a227 0%, #f5e07a 50%, #c9a227 100%);
+}
+
+/* BODY */
+.card-body {
+  padding: 32px 36px 36px;
+}
+
+.field-row {
   margin-bottom: 20px;
 }
 
-.form-group label {
-  display: block;
-  font-size: 13px;
-  color: #444;
-  margin-bottom: 5px;
+.field-label {
+  font-size: 11.5px;
   font-weight: 500;
+  color: #1a3a6b;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.form-group input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+.field-label .star {
+  color: #c9a227;
   font-size: 14px;
-  outline: none;
-  transition: border 0.2s;
 }
 
-.form-group input:focus {
-  border-color: #1a3a6b;
+.field-wrap {
+  position: relative;
 }
 
-button {
+.field-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.field-wrap input {
   width: 100%;
-  padding: 12px;
+  padding: 13px 14px 13px 40px;
+  background: #f8f7f4;
+  border: 1.5px solid #e8e6e0;
+  border-radius: 10px;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 14px;
+  color: #1a1a1a;
+  outline: none;
+  transition:
+    border 0.2s,
+    background 0.2s,
+    box-shadow 0.2s;
+}
+
+.field-wrap input::placeholder {
+  color: #b0aaa0;
+  font-weight: 300;
+}
+
+.field-wrap input:focus {
+  border-color: #1a3a6b;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(26, 58, 107, 0.07);
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e8e6e0, transparent);
+  margin: 24px 0;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 15px;
   background: #1a3a6b;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
+  font-family: "DM Sans", Arial, sans-serif;
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 500;
   cursor: pointer;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.25s,
+    transform 0.15s;
+}
+
+.btn-submit:hover {
+  background: #c9a227;
+  color: #111;
+  transform: translateY(-1px);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+.btn-arrow {
+  width: 22px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
   transition: background 0.2s;
 }
 
-button:hover {
-  background: #c9a227;
-  color: #111;
+/* FOOTER */
+.card-footer {
+  padding: 0 36px 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.footer-line {
+  flex: 1;
+  height: 1px;
+  background: #ece9e3;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #1a3a6b;
+  opacity: 0.5;
+  white-space: nowrap;
+}
+
+.logo-mark {
+  width: 16px;
+  height: 16px;
+  background: #1a3a6b;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  body {
+    padding: 20px 12px;
+    align-items: flex-start;
+  }
+  .card-header {
+    padding: 24px 24px 22px;
+  }
+  .card-header h2 {
+    font-size: 22px;
+  }
+  .card-body {
+    padding: 24px 24px 28px;
+  }
+  .card-footer {
+    padding: 0 24px 24px;
+  }
 }
 
 /* ===== SERTIFIKAT (preview.html) ===== */
-
 #sertifikat {
-  width: 1123px; /* A4 landscape ratio */
+  width: 1123px;
   height: 794px;
   position: relative;
   background: url("template.jpg") no-repeat center;
@@ -261,7 +470,6 @@ button:hover {
   text-align: center;
   margin-top: 20px;
 }
-
 .btn-group button {
   width: auto;
   padding: 10px 28px;
@@ -274,127 +482,74 @@ button:hover {
   font-family: "Times New Roman", serif;
   color: #000;
 }
-
-/* Nama */
 #c-nama {
   top: 330px;
   left: 300px;
   font-size: 26px;
   font-weight: bold;
 }
-
-/* NIP */
 #c-nip {
   top: 380px;
   left: 300px;
   font-size: 16px;
 }
-
-/* Jabatan */
 #c-jabatan {
   top: 410px;
   left: 300px;
   font-size: 16px;
 }
-
-/* Instansi */
 #c-instansi {
   top: 440px;
   left: 300px;
   font-size: 16px;
 }
-
-/* Nomor */
 #c-nomor {
   top: 250px;
   left: 400px;
   font-size: 14px;
 }
-
-/* Kegiatan */
 #c-kegiatan {
   top: 500px;
   left: 200px;
   width: 700px;
   text-align: center;
 }
-
-/* Tanggal */
 #c-tgl {
   top: 560px;
   right: 150px;
   font-size: 14px;
 }
 
-/* ================= MOBILE FIX ================= */
 @media (max-width: 768px) {
-  body {
-    padding: 20px 10px;
-  }
-
-  .container {
-    padding: 20px;
-    border-radius: 10px;
-  }
-
-  h2 {
-    font-size: 18px;
-  }
-
-  .sub {
-    font-size: 12px;
-  }
-
-  .form-group input {
-    font-size: 13px;
-    padding: 9px;
-  }
-
-  button {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  /* 🔥 SERTIFIKAT JADI RESPONSIVE */
   #sertifikat {
     width: 100%;
     height: auto;
-    aspect-ratio: 1123 / 794; /* jaga proporsi */
+    aspect-ratio: 1123 / 794;
   }
-
-  /* OPTIONAL: kecilkan isi supaya muat */
   .cert-body {
     padding: 0 20px;
   }
-
   .cert-row {
     font-size: 11px;
   }
-
   .cert-value.name {
     font-size: 16px;
   }
-
   .cert-kegiatan {
     font-size: 10px;
     padding: 6px 10px;
   }
-
   .cert-footer {
     padding: 10px 20px;
     flex-direction: column;
     align-items: center;
   }
-
   .sign-block {
     font-size: 10px;
   }
-
   .sign-name {
     font-size: 11px;
   }
-
-  /* 🔥 kalau masih kepotong → bisa aktifkan scroll */
   #sertifikat-wrapper {
     overflow-x: auto;
   }

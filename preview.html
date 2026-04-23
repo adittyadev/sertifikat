@@ -3,10 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <title>Preview Sertifikat</title>
+    <link rel="preload" as="image" href="format.png" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap");
       * {
         box-sizing: border-box;
         margin: 0;
@@ -14,243 +18,140 @@
       }
 
       body {
-        background: #c8c8c8;
+        background: #b0b0b0;
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 30px;
-        font-family: Arial, sans-serif;
+        font-family: "EB Garamond", Georgia, serif;
       }
 
-      /* ════════════════════════════════
-       SERTIFIKAT  1123 × 794 px (A4 Landscape)
-    ════════════════════════════════ */
+      /* ══ SERTIFIKAT CANVAS A4 Landscape ══ */
       #sertifikat {
         width: 1123px;
         height: 794px;
-        background: #fff;
+        background-image: url("format.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
         position: relative;
         overflow: hidden;
-        box-shadow: 0 6px 32px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
       }
 
-      /* ── LAYER 1: Titik-titik (canvas) ── */
-      #dotsCanvas {
+      .nomor-line {
         position: absolute;
-        inset: 0;
-        z-index: 1;
-      }
-
-      /* ── LAYER 2: Pita ribbon kiri (SVG) ── */
-      #ribbonSvg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 340px;
-        height: 794px;
-        z-index: 2;
-      }
-
-      /* ── LAYER 3: Watermark ── */
-      #watermarkSvg {
-        position: absolute;
-        top: 50%;
-        left: 54%;
-        transform: translate(-50%, -50%);
-        z-index: 3;
-        opacity: 0.07;
-        width: 320px;
-        height: 320px;
-      }
-
-      /* ── LAYER 4: Border luar ── */
-      .border-outer {
-        position: absolute;
-        inset: 11px;
-        border: 2.5px solid #111;
-        z-index: 4;
-        pointer-events: none;
-      }
-
-      /* ── LAYER 5: Ornamen sudut ── */
-      .corner-svg {
-        position: absolute;
-        width: 80px;
-        height: 80px;
-        z-index: 5;
-        pointer-events: none;
-      }
-      .c-tl {
-        top: 3px;
-        left: 3px;
-      }
-      .c-tr {
-        top: 3px;
-        right: 3px;
-        transform: scaleX(-1);
-      }
-      .c-bl {
-        bottom: 3px;
-        left: 3px;
-        transform: scaleY(-1);
-      }
-      .c-br {
-        bottom: 3px;
-        right: 3px;
-        transform: scale(-1, -1);
-      }
-
-      /* ── LAYER 6: Konten teks ── */
-      .cert-content {
-        position: absolute;
-        inset: 0;
-        z-index: 10;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 22px 55px 8px 55px;
-      }
-
-      /* Garuda */
-      #garudaSvg {
-        width: 82px;
-        margin-bottom: 5px;
-      }
-
-.title-main {
-  font-family: Arial, sans-serif;
-  font-size: 27px;
-  font-weight: 900;
-  letter-spacing: 2.5px;
-  color: #000;
-  margin-bottom: 2px;
-  text-align: center;
-  width: 100%;
-}
-
-.title-piagam {
-  font-family: "UnifrakturMaguntia", "Palatino Linotype", serif;
-  font-size: 38px;
-  color: #b07a00;
-  text-shadow:
-    1px 1px 0 #f5d060,
-    -1px -1px 0 #7a5000;
-  margin-bottom: 1px;
-  line-height: 1.1;
-  text-align: center;
-  width: 100%;
-}
-
-.header-title {
-  text-align: center;
-  width: 100%;
-  margin-top: 5px;
-  margin-bottom: 6px;
-}
-
-      .nomor-wrap {
+        top: 240px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        text-align: center;
         font-size: 13px;
-        color: #000;
-        text-align: center;
-        margin-bottom: 6px;
-        line-height: 1.5;
+        color: #222;
       }
 
+      /* ── Sub-title ──
+         Muncul di bawah "Piagam Penghargaan" dari background. */
       .sub-title {
-        font-size: 17px;
-        font-weight: bold;
-        color: #000;
+        position: absolute;
+        top: 265px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 65%;
         text-align: center;
-        line-height: 1.55;
-        margin-bottom: 16px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #111;
+        line-height: 1.6;
       }
 
-      /* ── TABEL ISIAN ── */
-  .isian-wrap {
-  width: 70%;
-  margin: 0 auto; /* center */
-  margin-bottom: 16px;
-  padding-left: 0; /* hapus offset */
-}
+      /* ── Tabel isian ── */
+      .isian-wrap {
+        position: absolute;
+        top: 335px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 65%;
+      }
 
-.isian-row {
-  display: flex;
-  align-items: flex-end;
-  margin-bottom: 9px;
-  justify-content: center;
-}
+      .isian-row {
+        display: grid;
+        grid-template-columns: 180px 20px 1fr;
+        align-items: center;
+        margin-bottom: 12px;
+      }
 
       .isian-label {
-        font-family: Arial, sans-serif;
-        font-size: 16.5px;
-        font-weight: bold;
-        color: #000;
-          width: 180px;
-  text-align: left;
+        width: 175px;
+        font-size: 15px;
+        font-weight: 700;
+        color: #111;
         flex-shrink: 0;
       }
 
       .isian-colon {
-        font-size: 16.5px;
-        font-weight: bold;
-        color: #000;
-        width: 20px;
-        flex-shrink: 0;
+        width: 22px;
         text-align: center;
+        font-weight: 700;
+        font-size: 15px;
+        flex-shrink: 0;
       }
 
       .isian-value {
-        font-family: "Times New Roman", serif;
-        font-size: 16.5px;
-        font-weight: bold;
-        color: #000;
-        border-bottom: 1.8px solid #000;
         flex: 1;
+        border-bottom: 1.5px solid #333;
         padding-bottom: 2px;
-        min-height: 22px;
-        padding-left: 4px;
+        padding-left: 6px;
+        font-size: 15px;
+        font-weight: 700;
+        color: #111;
+        min-width: 0;
       }
 
-      /* ── KETERANGAN ── */
+      /* ── Keterangan ── */
       .keterangan {
-        font-family: Arial, sans-serif;
-        font-size: 16.5px;
-        font-weight: bold;
-        color: #000;
+        position: absolute;
+        top: 460px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 65%;
         text-align: center;
-        line-height: 1.65;
-        padding: 0 30px;
-        margin-bottom: 16px;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.8;
       }
 
       /* ── TTD ── */
       .ttd-area {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        padding-left: 0;
-      }
-      .ttd-block {
+        position: absolute;
+        bottom: 90px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
         text-align: center;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
+      }
+
+      .ttd-block {
+        font-size: 15px;
+        font-weight: 600;
         color: #000;
         line-height: 1.6;
       }
+
       .ttd-name {
+        margin-top: 40px;
         font-size: 19px;
-        font-weight: 900;
+        font-weight: 700;
         text-decoration: underline;
-        margin-top: 44px;
       }
 
-      /* ── TOMBOL ── */
+      /* ── Tombol ── */
       .btn-group {
         margin-top: 22px;
         display: flex;
         gap: 10px;
       }
+
       button {
         padding: 11px 28px;
         border: none;
@@ -260,585 +161,80 @@
         cursor: pointer;
         font-size: 15px;
         font-weight: bold;
+        font-family: Arial, sans-serif;
+        transition: background 0.2s;
       }
+
       button:hover {
         background: #c9a227;
         color: #000;
       }
-      #garudaImg {
-  width: 90px;
-  margin-bottom: 6px;
-}
     </style>
   </head>
   <body>
     <div id="sertifikat">
-      <!-- LAYER 1: Dots canvas -->
-      <canvas id="dotsCanvas" width="1123" height="794"></canvas>
+      <!-- NOMOR -->
+      <div class="nomor-line">
+        <span id="c-nomor"></span>
+      </div>
 
-      <!-- LAYER 2: Ribbon merah-kuning-hitam -->
-      <svg
-        id="ribbonSvg"
-        viewBox="0 0 340 794"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-      >
-        <!-- Merah - paling lebar, di belakang -->
-        <path
-          d="M-20,-10 Q90,80 130,290 Q155,430 70,804 L-20,804 Z"
-          fill="#cc0000"
-        />
-        <!-- Kuning -->
-        <path
-          d="M28,-10 Q138,90 170,300 Q190,445 100,804 L68,804 Q158,445 135,298 Q102,88 -8,-10 Z"
-          fill="#f5d800"
-        />
-        <!-- Hitam - di paling atas, tersempit -->
-        <path
-          d="M68,-10 Q172,95 200,308 Q220,458 125,804 L95,804 Q188,458 166,306 Q136,92 32,-10 Z"
-          fill="#111111"
-        />
-        <!-- Highlight kilap merah -->
-        <path
-          d="M-20,-10 Q40,70 65,240 Q78,330 25,530 L-20,530 Z"
-          fill="rgba(255,255,255,0.09)"
-        />
-      </svg>
+      <!-- SUB TITLE -->
+      <div class="sub-title">
+        Pemerintah Provinsi Sumatera Barat<br />
+        Memberikan Penghargaan dan Ucapan Terima Kasih Kepada :
+      </div>
 
-      <!-- LAYER 3: Watermark Garuda -->
-        <ellipse cx="60" cy="68" rx="22" ry="28" fill="#8B6914" />
-        <ellipse cx="60" cy="44" rx="13" ry="13" fill="#8B6914" />
-        <path
-          d="M48 36 Q60 26 72 36 Q66 30 60 29 Q54 30 48 36Z"
-          fill="#8B6914"
-        />
-        <rect x="57" y="24" width="6" height="9" rx="3" fill="#8B6914" />
-        <rect x="49" y="26" width="4" height="7" rx="2" fill="#8B6914" />
-        <rect x="67" y="26" width="4" height="7" rx="2" fill="#8B6914" />
-        <path d="M40 60 Q8 36 2 70 Q10 63 22 65 Q30 59 39 65Z" fill="#8B6914" />
-        <path
-          d="M40 68 Q10 50 4 82 Q12 75 25 75 Q33 69 40 74Z"
-          fill="#7a5a10"
-        />
-        <path
-          d="M40 76 Q14 64 10 92 Q18 84 31 84 Q38 78 40 82Z"
-          fill="#8B6914"
-        />
-        <path
-          d="M80 60 Q112 36 118 70 Q110 63 98 65 Q90 59 81 65Z"
-          fill="#8B6914"
-        />
-        <path
-          d="M80 68 Q110 50 116 82 Q108 75 95 75 Q87 69 80 74Z"
-          fill="#7a5a10"
-        />
-        <path
-          d="M80 76 Q106 64 110 92 Q102 84 89 84 Q82 78 80 82Z"
-          fill="#8B6914"
-        />
-        <path
-          d="M50 96 Q48 108 43 111 M50 96 Q50 110 47 114 M50 96 Q52 110 50 114 M50 96 Q55 108 57 111"
-          stroke="#8B6914"
-          stroke-width="2.5"
-          fill="none"
-          stroke-linecap="round"
-        />
-        <path
-          d="M70 96 Q68 108 63 111 M70 96 Q70 110 67 114 M70 96 Q72 110 70 114 M70 96 Q75 108 77 111"
-          stroke="#8B6914"
-          stroke-width="2.5"
-          fill="none"
-          stroke-linecap="round"
-        />
-        <path
-          d="M46 63 Q46 91 60 97 Q74 91 74 63 Z"
-          fill="#990000"
-          stroke="#8B6914"
-          stroke-width="1.5"
-        />
-        <line
-          x1="60"
-          y1="63"
-          x2="60"
-          y2="97"
-          stroke="#8B6914"
-          stroke-width="1.5"
-        />
-        <line
-          x1="46"
-          y1="78"
-          x2="74"
-          y2="78"
-          stroke="#8B6914"
-          stroke-width="1.5"
-        />
-      </svg>
-
-      <!-- LAYER 4: Border -->
-      <div class="border-outer"></div>
-
-      <!-- LAYER 5: Ornamen sudut -->
-      <svg
-        class="corner-svg c-tl"
-        viewBox="0 0 80 80"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M6,6 C6,44 44,44 44,44 C44,44 6,44 6,74"
-          stroke="#111"
-          stroke-width="2.5"
-          fill="none"
-          stroke-linecap="round"
-        />
-        <path
-          d="M16,6 C16,30 40,30 40,30"
-          stroke="#111"
-          stroke-width="1.5"
-          fill="none"
-          stroke-linecap="round"
-        />
-        <path
-          d="M6,16 C30,16 30,40 30,40"
-          stroke="#111"
-          stroke-width="1.5"
-          fill="none"
-          stroke-linecap="round"
-        />
-        <circle
-          cx="6"
-          cy="6"
-          r="6"
-          fill="none"
-          stroke="#111"
-          stroke-width="2.2"
-        />
-        <circle
-          cx="44"
-          cy="44"
-          r="5"
-          fill="none"
-          stroke="#111"
-          stroke-width="1.8"
-        />
-        <!-- Petal dekoratif -->
-        <path d="M6,6 Q18,3 22,12 Q12,16 6,6Z" fill="#111" />
-        <path d="M6,6 Q3,18 12,22 Q16,12 6,6Z" fill="#111" />
-        <circle cx="6" cy="6" r="2.5" fill="#fff" />
-      </svg>
-      <svg
-        class="corner-svg c-tr"
-        viewBox="0 0 80 80"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M6,6 C6,44 44,44 44,44 C44,44 6,44 6,74"
-          stroke="#111"
-          stroke-width="2.5"
-          fill="none"
-          stroke-linecap="round"
-        />
-        <path
-          d="M16,6 C16,30 40,30 40,30"
-          stroke="#111"
-          stroke-width="1.5"
-          fill="none"
-          stroke-linecap="round"
-        />
-        <path
-          d="M6,16 C30,16 30,40 30,40"
-          stroke="#111"
-          stroke-width="1.5"
-          fill="none"
-          stroke-linecap="round"
-        />
-        <circle
-          cx="6"
-          cy="6"
-          r="6"
-          fill="none"
-          stroke="#111"
-          stroke-width="2.2"
-        />
-        <circle
-          cx="44"
-          cy="44"
-          r="5"
-          fill="none"
-          stroke="#111"
-          stroke-width="1.8"
-        />
-        <path d="M6,6 Q18,3 22,12 Q12,16 6,6Z" fill="#111" />
-        <path d="M6,6 Q3,18 12,22 Q16,12 6,6Z" fill="#111" />
-        <circle cx="6" cy="6" r="2.5" fill="#fff" />
-      </svg>
-      <svg
-        class="corner-svg c-bl"
-        viewBox="0 0 80 80"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M6,6 C6,44 44,44 44,44 C44,44 6,44 6,74"
-          stroke="#111"
-          stroke-width="2.5"
-          fill="none"
-          stroke-linecap="round"
-        />
-        <path
-          d="M16,6 C16,30 40,30 40,30"
-          stroke="#111"
-          stroke-width="1.5"
-          fill="none"
-          stroke-linecap="round"
-        />
-        <path
-          d="M6,16 C30,16 30,40 30,40"
-          stroke="#111"
-          stroke-width="1.5"
-          fill="none"
-          stroke-linecap="round"
-        />
-        <circle
-          cx="6"
-          cy="6"
-          r="6"
-          fill="none"
-          stroke="#111"
-          stroke-width="2.2"
-        />
-        <circle
-          cx="44"
-          cy="44"
-          r="5"
-          fill="none"
-          stroke="#111"
-          stroke-width="1.8"
-        />
-        <path d="M6,6 Q18,3 22,12 Q12,16 6,6Z" fill="#111" />
-        <path d="M6,6 Q3,18 12,22 Q16,12 6,6Z" fill="#111" />
-        <circle cx="6" cy="6" r="2.5" fill="#fff" />
-      </svg>
-      <svg
-        class="corner-svg c-br"
-        viewBox="0 0 80 80"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M6,6 C6,44 44,44 44,44 C44,44 6,44 6,74"
-          stroke="#111"
-          stroke-width="2.5"
-          fill="none"
-          stroke-linecap="round"
-        />
-        <path
-          d="M16,6 C16,30 40,30 40,30"
-          stroke="#111"
-          stroke-width="1.5"
-          fill="none"
-          stroke-linecap="round"
-        />
-        <path
-          d="M6,16 C30,16 30,40 30,40"
-          stroke="#111"
-          stroke-width="1.5"
-          fill="none"
-          stroke-linecap="round"
-        />
-        <circle
-          cx="6"
-          cy="6"
-          r="6"
-          fill="none"
-          stroke="#111"
-          stroke-width="2.2"
-        />
-        <circle
-          cx="44"
-          cy="44"
-          r="5"
-          fill="none"
-          stroke="#111"
-          stroke-width="1.8"
-        />
-        <path d="M6,6 Q18,3 22,12 Q12,16 6,6Z" fill="#111" />
-        <path d="M6,6 Q3,18 12,22 Q16,12 6,6Z" fill="#111" />
-        <circle cx="6" cy="6" r="2.5" fill="#fff" />
-      </svg>
-
-      <!-- LAYER 6: Konten -->
-      <div class="cert-content">
-        <!-- Garuda SVG -->
- <img src="garuda.png" id="garudaImg" />
-          <!-- Badan -->
-          <ellipse cx="60" cy="70" rx="21" ry="27" fill="#c8960c" />
-          <!-- Kepala -->
-          <ellipse cx="60" cy="45" rx="12" ry="12" fill="#c8960c" />
-          <!-- Mahkota -->
-          <path
-            d="M49,39 Q60,28 71,39 Q66,33 60,31 Q54,33 49,39Z"
-            fill="#c8960c"
-          />
-          <rect x="57" y="26" width="6" height="9" rx="3" fill="#c8960c" />
-          <rect x="49" y="28" width="4.5" height="7" rx="2" fill="#c8960c" />
-          <rect x="66.5" y="28" width="4.5" height="7" rx="2" fill="#c8960c" />
-          <!-- Paruh -->
-          <path d="M56,53 Q60,58 64,53 Q60,57 56,53Z" fill="#d4a000" />
-          <!-- Mata -->
-          <circle cx="55" cy="47" r="2" fill="#111" />
-          <circle cx="65" cy="47" r="2" fill="#111" />
-          <!-- Sayap kiri baris 1 -->
-          <path
-            d="M40,61 Q8,38 2,70 Q10,63 23,65 Q32,59 40,66Z"
-            fill="#c8960c"
-          />
-          <!-- Sayap kiri baris 2 -->
-          <path
-            d="M40,68 Q9,51 4,83 Q14,76 26,76 Q34,70 40,74Z"
-            fill="#b07d0a"
-          />
-          <!-- Sayap kiri baris 3 -->
-          <path
-            d="M40,75 Q14,64 10,93 Q20,85 32,85 Q38,79 40,82Z"
-            fill="#c8960c"
-          />
-          <!-- Sayap kanan baris 1 -->
-          <path
-            d="M80,61 Q112,38 118,70 Q110,63 97,65 Q88,59 80,66Z"
-            fill="#c8960c"
-          />
-          <!-- Sayap kanan baris 2 -->
-          <path
-            d="M80,68 Q111,51 116,83 Q106,76 94,76 Q86,70 80,74Z"
-            fill="#b07d0a"
-          />
-          <!-- Sayap kanan baris 3 -->
-          <path
-            d="M80,75 Q106,64 110,93 Q100,85 88,85 Q82,79 80,82Z"
-            fill="#c8960c"
-          />
-          <!-- Ekor -->
-          <path
-            d="M46,95 Q60,106 74,95 Q68,101 60,99 Q52,101 46,95Z"
-            fill="#c8960c"
-          />
-          <!-- Cakar kiri -->
-          <line
-            x1="50"
-            y1="97"
-            x2="43"
-            y2="110"
-            stroke="#c8960c"
-            stroke-width="2.5"
-            stroke-linecap="round"
-          />
-          <line
-            x1="50"
-            y1="97"
-            x2="47"
-            y2="112"
-            stroke="#c8960c"
-            stroke-width="2.5"
-            stroke-linecap="round"
-          />
-          <line
-            x1="50"
-            y1="97"
-            x2="52"
-            y2="112"
-            stroke="#c8960c"
-            stroke-width="2.5"
-            stroke-linecap="round"
-          />
-          <line
-            x1="50"
-            y1="97"
-            x2="57"
-            y2="110"
-            stroke="#c8960c"
-            stroke-width="2.5"
-            stroke-linecap="round"
-          />
-          <!-- Cakar kanan -->
-          <line
-            x1="70"
-            y1="97"
-            x2="63"
-            y2="110"
-            stroke="#c8960c"
-            stroke-width="2.5"
-            stroke-linecap="round"
-          />
-          <line
-            x1="70"
-            y1="97"
-            x2="67"
-            y2="112"
-            stroke="#c8960c"
-            stroke-width="2.5"
-            stroke-linecap="round"
-          />
-          <line
-            x1="70"
-            y1="97"
-            x2="72"
-            y2="112"
-            stroke="#c8960c"
-            stroke-width="2.5"
-            stroke-linecap="round"
-          />
-          <line
-            x1="70"
-            y1="97"
-            x2="77"
-            y2="110"
-            stroke="#c8960c"
-            stroke-width="2.5"
-            stroke-linecap="round"
-          />
-          <!-- Perisai -->
-          <path
-            d="M46,64 Q46,92 60,98 Q74,92 74,64 Z"
-            fill="#cc0000"
-            stroke="#a07008"
-            stroke-width="1.5"
-          />
-          <line
-            x1="60"
-            y1="64"
-            x2="60"
-            y2="98"
-            stroke="#a07008"
-            stroke-width="1.5"
-          />
-          <line
-            x1="46"
-            y1="79"
-            x2="74"
-            y2="79"
-            stroke="#a07008"
-            stroke-width="1.5"
-          />
-          <!-- Bintang di perisai -->
-          <text
-            x="60"
-            y="75"
-            text-anchor="middle"
-            font-size="10"
-            fill="#f5c000"
-          >
-            ★
-          </text>
-        </svg>
-
-       <div class="header-title">
-  <div class="title-main">GUBERNUR SUMATERA BARAT</div>
-  <div class="title-piagam">Piagam Penghargaan</div>
-</div>
-
-        <div class="nomor-wrap">
-          <span id="c-nomor"></span>
+      <!-- DATA ISIAN -->
+      <div class="isian-wrap">
+        <div class="isian-row">
+          <span class="isian-label">Nama</span>
+          <span class="isian-colon">:</span>
+          <span class="isian-value" id="c-nama"></span>
         </div>
-
-        <div class="sub-title">
-          Pemerintah Provinsi Sumatera Barat<br />
-          Memberikan Penghargaan dan Ucapan Terima Kasih Kepada :
+        <div class="isian-row">
+          <span class="isian-label">NIP/NRP</span>
+          <span class="isian-colon">:</span>
+          <span class="isian-value" id="c-nip"></span>
         </div>
-
-        <!-- ── ISIAN DATA ── -->
-        <div class="isian-wrap">
-          <div class="isian-row">
-            <span class="isian-label">Nama</span>
-            <span class="isian-colon">:</span>
-            <span class="isian-value" id="c-nama"></span>
-          </div>
-          <div class="isian-row">
-            <span class="isian-label">NIP/NRP</span>
-            <span class="isian-colon">:</span>
-            <span class="isian-value" id="c-nip"></span>
-          </div>
-          <div class="isian-row">
-            <span class="isian-label">Instansi/Lembaga</span>
-            <span class="isian-colon">:</span>
-            <span class="isian-value" id="c-instansi"></span>
-          </div>
-        </div>
-
-        <!-- ── KETERANGAN ── -->
-        <div class="keterangan">
-          Atas dedikasi waktu dan energi yang diberikan, ini merupakan bagian
-          penting<br />
-          dalam Penanganan Darurat Bencana Alam Hidrometeorogi Sumatera Barat<br />
-          dari tanggal 25 November s.d 22 Desember 2025
-        </div>
-
-        <!-- ── TTD ── -->
-        <div class="ttd-area">
-          <div class="ttd-block">
-            <div>Padang, 31 Desember 2025</div>
-            <div>Gubernur Sumatera Barat</div>
-            <div class="ttd-name">Mahyeldi</div>
-          </div>
+        <div class="isian-row">
+          <span class="isian-label">Instansi/Lembaga</span>
+          <span class="isian-colon">:</span>
+          <span class="isian-value" id="c-instansi"></span>
         </div>
       </div>
-      <!-- /cert-content -->
-    </div>
-    <!-- /sertifikat -->
 
+      <!-- KETERANGAN -->
+      <div class="keterangan">
+        Atas dedikasi waktu dan energi yang diberikan, ini merupakan bagian
+        penting<br />
+        dalam Penanganan Darurat Bencana Alam Hidrometeorogi Sumatera Barat<br />
+        dari tanggal 25 November s.d 22 Desember 2025
+      </div>
+
+      <!-- TTD -->
+      <div class="ttd-area">
+        <div class="ttd-block">
+          <div>Padang, 31 Desember 2025</div>
+          <div>Gubernur Sumatera Barat</div>
+          <div class="ttd-name">Mahyeldi</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUTTON -->
     <div class="btn-group">
       <button onclick="downloadPDF()">⬇ Download PDF</button>
       <button onclick="window.location.href = 'index.html'">← Kembali</button>
     </div>
 
     <script>
-      /* ══ GAMBAR TITIK-TITIK DENGAN CANVAS ══ */
-      (function () {
-        const canvas = document.getElementById("dotsCanvas");
-        const ctx = canvas.getContext("2d");
-
-        // === TITIK ABU-ABU GRADASI (lintasan diagonal kiri-bawah) ===
-        // Titik mengikuti jalur dari tengah-kiri ke kanan-bawah
-        const dotGroups = [
-          // [ startX, startY, cols, rows, stepX, stepY, sizeMin, sizeMax, colorH, colorS, alphaMax ]
-          [55, 190, 18, 28, 12, 20, 2, 13, 0, 0, 0.8], // abu gelap utama
-          [140, 220, 16, 22, 13, 18, 1.5, 9, 38, 85, 0.13], // kuning samar
-          [30, 120, 12, 18, 11, 22, 1.5, 7, 0, 70, 0.11], // merah samar
-        ];
-
-        dotGroups.forEach(
-          ([sx, sy, cols, rows, dx, dy, szMin, szMax, h, s, aMax]) => {
-            for (let r = 0; r < rows; r++) {
-              for (let c = 0; c < cols; c++) {
-                const x = sx + c * dx + r * (dx * 0.55);
-                const y = sy + r * dy - c * (dy * 0.08);
-
-                // Batasi area supaya tidak keluar kanan/bawah terlalu jauh
-                if (x > 500 || y > 780 || x < 15) continue;
-
-                const prog = (r * cols + c) / (rows * cols);
-                const size = szMin + prog * (szMax - szMin);
-                const lightness =
-                  h === 0 && s === 0
-                    ? Math.round(15 + prog * 68) // abu: dari hitam ke terang
-                    : 60;
-                const alpha = aMax * (1 - prog * 0.45);
-
-                ctx.beginPath();
-                ctx.arc(x, y, size, 0, Math.PI * 2);
-                ctx.fillStyle =
-                  h === 0 && s === 0
-                    ? `hsla(0,0%,${lightness}%,${alpha})`
-                    : `hsla(${h},${s}%,60%,${alpha})`;
-                ctx.fill();
-              }
-            }
-          },
-        );
-      })();
-
-      /* ══ ISI DATA ══ */
       const data = JSON.parse(localStorage.getItem("sertifikat"));
       if (!data) {
-        alert("Data tidak ditemukan!");
-        window.location.href = "index.html";
+        document.getElementById("c-nomor").innerText =
+          "No : 0122/SERT-I/5400/11/PemprovSumbar/2026";
+        document.getElementById("c-nama").innerText = "ADITTYA ALYANDRA";
+        document.getElementById("c-nip").innerText = "8482364899";
+        document.getElementById("c-instansi").innerText = "kadaiudays";
       } else {
         document.getElementById("c-nomor").innerText = "No : " + data.nomor;
         document.getElementById("c-nama").innerText = data.nama;
@@ -846,20 +242,37 @@
         document.getElementById("c-instansi").innerText = data.instansi;
       }
 
-      /* ══ DOWNLOAD PDF ══ */
       async function downloadPDF() {
-        const el = document.getElementById("sertifikat");
-        const canvas = await html2canvas(el, {
-          scale: 3,
-          useCORS: true,
-          allowTaint: true,
-          backgroundColor: "#ffffff",
-          logging: false,
-        });
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF("landscape", "mm", "a4");
-        pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, 297, 210);
-        pdf.save("sertifikat_" + (data ? data.nama : "output") + ".pdf");
+        try {
+          const element = document.getElementById("sertifikat");
+
+          // tunggu render
+          await new Promise((r) => setTimeout(r, 800));
+
+          const canvas = await html2canvas(element, {
+            scale: 3, // lebih tajam
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: "#ffffff",
+            logging: false,
+          });
+
+          const imgData = canvas.toDataURL("image/jpeg", 1.0);
+
+          const { jsPDF } = window.jspdf;
+
+          const pdf = new jsPDF({
+            orientation: "landscape",
+            unit: "mm",
+            format: "a4",
+          });
+
+          pdf.addImage(imgData, "JPEG", 0, 0, 297, 210);
+          pdf.save("sertifikat.pdf");
+        } catch (err) {
+          console.error("ERROR PDF:", err);
+          alert("Gagal download PDF, cek console (F12)");
+        }
       }
     </script>
   </body>

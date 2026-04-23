@@ -2,281 +2,33 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <title>Preview Sertifikat</title>
-    <link rel="preload" as="image" href="format.png" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
-        background: #b0b0b0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 30px;
-        font-family: "Times New Roman", Times, serif; /* ganti */
-      }
-
-      /* ══ SERTIFIKAT CANVAS A4 Landscape ══ */
-      #sertifikat {
-        width: 1123px;
-        height: 794px;
-        background-image: url("format.png");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
-        font-size: 16px;
-        font-weight: bold;
-      }
-
-      .nomor-line {
-        position: absolute;
-        top: 245px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60%;
-        text-align: center;
-        font-size: 14px;
-        color: #222;
-        font-weight: normal;
-      }
-
-      /* ── Sub-title ──
-         Muncul di bawah "Piagam Penghargaan" dari background. */
-      .sub-title {
-        position: absolute;
-        top: 275px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 70%;
-        text-align: center;
-        font-size: 18px;
-        font-weight: bold;
-        color: #111;
-        line-height: 1.5;
-      }
-
-      /* ── Tabel isian ── */
-      .isian-wrap {
-        position: absolute;
-        top: 350px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60%;
-      }
-
-      .isian-row {
-        display: grid;
-        grid-template-columns: 200px 20px 1fr;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-
-      .isian-label {
-        width: 175px;
-        font-size: 18px;
-        font-weight: 700;
-        color: #111;
-        flex-shrink: 0;
-      }
-
-      .isian-colon {
-        width: 22px;
-        text-align: center;
-        font-weight: 700;
-        font-size: 15px;
-        flex-shrink: 0;
-      }
-
-      .isian-value {
-        flex: 1;
-        border-bottom: 2px solid #333;
-        padding-bottom: 2px;
-        padding-left: 6px;
-        font-size: 16px; /* dari 15 → 14 */
-        font-weight: bold;
-        color: #111;
-      }
-
-      /* ── Keterangan ── */
-      .keterangan {
-        position: absolute;
-        top: 470px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 70%;
-        text-align: center;
-        font-size: 18px;
-        font-weight: bold;
-        line-height: 1.7;
-      }
-
-      /* ── TTD ── */
-      .ttd-area {
-        position: absolute; /* 🔥 INI YANG KURANG */
-        bottom: 100px;
-        right: 120px;
-        left: auto;
-        transform: none;
-        width: auto;
-        text-align: center;
-      }
-
-      .ttd-block {
-        font-size: 16px;
-        font-weight: 600;
-        color: #000;
-        line-height: 1.6;
-      }
-
-      .ttd-name {
-        margin-top: 50px;
-        font-size: 18px;
-        font-weight: 700;
-        text-decoration: underline;
-      }
-
-      /* ── Tombol ── */
-      .btn-group {
-        margin-top: 22px;
-        display: flex;
-        gap: 10px;
-      }
-
-      button {
-        padding: 11px 28px;
-        border: none;
-        background: #1a3a6b;
-        color: white;
-        border-radius: 7px;
-        cursor: pointer;
-        font-size: 15px;
-        font-weight: bold;
-        font-family: Arial, sans-serif;
-        transition: background 0.2s;
-      }
-
-      button:hover {
-        background: #c9a227;
-        color: #000;
-      }
-    </style>
+    <title>Form Sertifikat BPSDM</title>
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div id="sertifikat">
-      <!-- NOMOR -->
-      <div class="nomor-line">
-        <span id="c-nomor"></span>
-      </div>
+    <div class="container">
+      <h2>Generator Sertifikat</h2>
+      <p class="sub">BPSDM Provinsi Sumatera Barat</p>
 
-      <!-- SUB TITLE -->
-      <div class="sub-title">
-        Pemerintah Provinsi Sumatera Barat<br />
-        Memberikan Penghargaan dan Ucapan Terima Kasih Kepada :
-      </div>
-
-      <!-- DATA ISIAN -->
-      <div class="isian-wrap">
-        <div class="isian-row">
-          <span class="isian-label">Nama</span>
-          <span class="isian-colon">:</span>
-          <span class="isian-value" id="c-nama"></span>
+      <div class="form-card">
+        <div class="form-group">
+          <label>Nama</label>
+          <input type="text" id="nama" placeholder="Nama lengkap" />
         </div>
-        <div class="isian-row">
-          <span class="isian-label">NIP/NRP</span>
-          <span class="isian-colon">:</span>
-          <span class="isian-value" id="c-nip"></span>
+        <div class="form-group">
+          <label>NIP/NRP</label>
+          <input type="text" id="nip" placeholder="Nomor Induk Pegawai" />
         </div>
-        <div class="isian-row">
-          <span class="isian-label">Instansi/Lembaga</span>
-          <span class="isian-colon">:</span>
-          <span class="isian-value" id="c-instansi"></span>
+        <div class="form-group">
+          <label>Instansi/Lembaga</label>
+          <input type="text" id="instansi" placeholder="Nama instansi" />
         </div>
       </div>
 
-      <!-- KETERANGAN -->
-      <div class="keterangan">
-        Atas dedikasi waktu dan energi yang diberikan, ini merupakan bagian
-        penting<br />
-        dalam Penanganan Darurat Bencana Alam Hidrometeorogi Sumatera Barat<br />
-        dari tanggal 25 November s.d 22 Desember 2025
-      </div>
-
-      <!-- TTD -->
-      <div class="ttd-area">
-        <div class="ttd-block">
-          <div>Padang, 31 Desember 2025</div>
-          <div>Gubernur Sumatera Barat</div>
-          <div class="ttd-name">Mahyeldi</div>
-        </div>
-      </div>
+      <button onclick="kirimData()">Generate Sertifikat</button>
     </div>
 
-    <!-- BUTTON -->
-    <div class="btn-group">
-      <button onclick="downloadPDF()">⬇ Download PDF</button>
-      <button onclick="window.location.href = 'index.html'">← Kembali</button>
-    </div>
-
-    <script>
-      const data = JSON.parse(localStorage.getItem("sertifikat"));
-      if (!data) {
-        document.getElementById("c-nomor").innerText =
-          "No : 0122/SERT-I/5400/11/PemprovSumbar/2026";
-        document.getElementById("c-nama").innerText = "ADITTYA ALYANDRA";
-        document.getElementById("c-nip").innerText = "8482364899";
-        document.getElementById("c-instansi").innerText = "kadaiudays";
-      } else {
-        document.getElementById("c-nomor").innerText = "No : " + data.nomor;
-        document.getElementById("c-nama").innerText = data.nama;
-        document.getElementById("c-nip").innerText = data.nip;
-        document.getElementById("c-instansi").innerText = data.instansi;
-      }
-
-      async function downloadPDF() {
-        try {
-          const element = document.getElementById("sertifikat");
-
-          // tunggu render
-          await new Promise((r) => setTimeout(r, 800));
-
-          const canvas = await html2canvas(element, {
-            scale: 3, // lebih tajam
-            useCORS: true,
-            allowTaint: true,
-            backgroundColor: "#ffffff",
-            logging: false,
-          });
-
-          const imgData = canvas.toDataURL("image/jpeg", 1.0);
-
-          const { jsPDF } = window.jspdf;
-
-          const pdf = new jsPDF({
-            orientation: "landscape",
-            unit: "mm",
-            format: "a4",
-          });
-
-          pdf.addImage(imgData, "JPEG", 0, 0, 297, 210);
-          pdf.save("sertifikat.pdf");
-        } catch (err) {
-          console.error("ERROR PDF:", err);
-          alert("Gagal download PDF, cek console (F12)");
-        }
-      }
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>

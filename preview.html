@@ -23,7 +23,7 @@
         flex-direction: column;
         align-items: center;
         padding: 30px;
-        font-family: "EB Garamond", Georgia, serif;
+        font-family: "Times New Roman", Times, serif; /* ganti */
       }
 
       /* ══ SERTIFIKAT CANVAS A4 Landscape ══ */
@@ -37,53 +37,56 @@
         position: relative;
         overflow: hidden;
         box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+        font-size: 16px;
+        font-weight: bold;
       }
 
       .nomor-line {
         position: absolute;
-        top: 240px;
+        top: 245px;
         left: 50%;
         transform: translateX(-50%);
         width: 60%;
         text-align: center;
-        font-size: 13px;
+        font-size: 14px;
         color: #222;
+        font-weight: normal;
       }
 
       /* ── Sub-title ──
          Muncul di bawah "Piagam Penghargaan" dari background. */
       .sub-title {
         position: absolute;
-        top: 265px;
+        top: 275px;
         left: 50%;
         transform: translateX(-50%);
-        width: 65%;
+        width: 70%;
         text-align: center;
-        font-size: 16px;
-        font-weight: 600;
+        font-size: 18px;
+        font-weight: bold;
         color: #111;
-        line-height: 1.6;
+        line-height: 1.5;
       }
 
       /* ── Tabel isian ── */
       .isian-wrap {
         position: absolute;
-        top: 335px;
+        top: 350px;
         left: 50%;
         transform: translateX(-50%);
-        width: 65%;
+        width: 60%;
       }
 
       .isian-row {
         display: grid;
-        grid-template-columns: 180px 20px 1fr;
+        grid-template-columns: 200px 20px 1fr;
         align-items: center;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
       }
 
       .isian-label {
         width: 175px;
-        font-size: 15px;
+        font-size: 18px;
         font-weight: 700;
         color: #111;
         flex-shrink: 0;
@@ -99,48 +102,48 @@
 
       .isian-value {
         flex: 1;
-        border-bottom: 1.5px solid #333;
+        border-bottom: 2px solid #333;
         padding-bottom: 2px;
         padding-left: 6px;
-        font-size: 15px;
-        font-weight: 700;
+        font-size: 16px; /* dari 15 → 14 */
+        font-weight: bold;
         color: #111;
-        min-width: 0;
       }
 
       /* ── Keterangan ── */
       .keterangan {
         position: absolute;
-        top: 460px;
+        top: 470px;
         left: 50%;
         transform: translateX(-50%);
-        width: 65%;
+        width: 70%;
         text-align: center;
-        font-size: 15px;
-        font-weight: 600;
-        line-height: 1.8;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 1.7;
       }
 
       /* ── TTD ── */
       .ttd-area {
-        position: absolute;
-        bottom: 90px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60%;
+        position: absolute; /* 🔥 INI YANG KURANG */
+        bottom: 100px;
+        right: 120px;
+        left: auto;
+        transform: none;
+        width: auto;
         text-align: center;
       }
 
       .ttd-block {
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 600;
         color: #000;
         line-height: 1.6;
       }
 
       .ttd-name {
-        margin-top: 40px;
-        font-size: 19px;
+        margin-top: 50px;
+        font-size: 18px;
         font-weight: 700;
         text-decoration: underline;
       }

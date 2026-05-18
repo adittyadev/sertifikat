@@ -27,12 +27,11 @@
         flex-direction: column;
         align-items: center;
         padding: 20px;
-        overflow-x: auto; /* supaya bisa scroll horizontal */
-        min-width: 1200px; /* paksa lebar desktop */
+        overflow-x: auto; 
+        min-width: 1200px; 
         font-family: "Times New Roman", Times, serif;
       }
 
-      /* ══ SERTIFIKAT CANVAS A4 Landscape ══ */
       #sertifikat {
         width: 1123px;
         height: 794px;
@@ -71,10 +70,8 @@
         font-weight: 900;
         color: #000;
         line-height: 1.5;
-        text-shadow: 0.5px 0.5px 0px #000, -0.5px 0px 0px #000;
       }
 
-      /* ── Tabel isian ── */
       .isian-wrap {
         position: absolute;
         top: 350px;
@@ -96,7 +93,6 @@
         font-weight: 900;
         color: #000;
         flex-shrink: 0;
-        text-shadow: 0.5px 0.5px 0px #000, -0.5px 0px 0px #000;
       }
 
       .isian-colon {
@@ -112,13 +108,11 @@
         border-bottom: 2px solid #000;
         padding-bottom: 2px;
         padding-left: 6px;
-        font-size: 16px; /* dari 15 → 14 */
+        font-size: 16px;
         font-weight: 900;
         color: #000;
-        text-shadow: 0.5px 0.5px 0px #000, -0.5px 0px 0px #000;
       }
 
-      /* ── Keterangan ── */
       .keterangan {
         position: absolute;
         top: 450px;
@@ -133,16 +127,15 @@
         text-shadow: 0.5px 0.5px 0px #000, -0.5px 0px 0px #000;
       }
 
-      /* ── TTD ── */
       .ttd-area {
-  position: absolute;
-  bottom: 80px;
-  right: 13%;        
-  left: auto;
-  transform: none;
-  width: 250px;
-  text-align: center;
-}
+        position: absolute;
+        bottom: 80px;
+        right: 13%;        
+        left: auto;
+        transform: none;
+        width: 250px;
+        text-align: center;
+      }
 
       .ttd-block {
         font-size: 16px;
@@ -160,14 +153,13 @@
       }
 
      .ttd-image {
-  display: block;
-  width: 130px;      /* ← sedikit dikecilkan */
-  height: 70px;
-  margin: 8px auto;
-  object-fit: contain;
-}
+       display: block;
+       width: 130px;
+       height: 70px;
+       margin: 8px auto;
+       object-fit: contain;
+     }
 
-      /* ── Tombol ── */
       .btn-group {
         margin-top: 22px;
         display: flex;
@@ -198,7 +190,6 @@
         flex-shrink: 0;
       }
 
-      /* Responsive HP */
      @media (max-width: 768px) {
   body {
     align-items: flex-start;
@@ -206,13 +197,13 @@
   }
 
   #sertifikat {
-    transform: scale(0.32);        /* ← sesuaikan scale HP */
+    transform: scale(0.32);        
     transform-origin: top left;
-    margin-bottom: -540px;         /* ← sesuaikan dengan scale baru */
+    margin-bottom: -540px; 
   }
 
   .btn-group {
-    margin-top: 10px;              /* ← hapus nilai negatif besar */
+    margin-top: 10px;              
     padding-left: 10px;
   }
 }

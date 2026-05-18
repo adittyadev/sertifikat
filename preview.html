@@ -131,14 +131,14 @@
 
       /* ── TTD ── */
       .ttd-area {
-        position: absolute; /* 🔥 INI YANG KURANG */
-        bottom: 80px;
-        right: 150px;
-        left: auto;
-        transform: none;
-        width: 200px;
-        text-align: center;
-      }
+  position: absolute;
+  bottom: 80px;
+  right: 13%;        
+  left: auto;
+  transform: none;
+  width: 200px;
+  text-align: center;
+}
 
       .ttd-block {
         font-size: 16px;
@@ -154,13 +154,13 @@
         text-decoration: underline;
       }
 
-      .ttd-image {
-        display: block;
-        width: 150px;
-        height: 80px;
-        margin: 8px auto;
-        object-fit: contain;
-      }
+     .ttd-image {
+  display: block;
+  width: 130px;      /* ← sedikit dikecilkan */
+  height: 70px;
+  margin: 8px auto;
+  object-fit: contain;
+}
 
       /* ── Tombol ── */
       .btn-group {
@@ -186,7 +186,7 @@
         background: #c9a227;
         color: #000;
       }
-
+      
       #sertifikat {
         width: 1123px;
         height: 794px;
@@ -194,23 +194,23 @@
       }
 
       /* Responsive HP */
-      @media (max-width: 768px) {
-        body {
-          align-items: flex-start;
-          padding: 10px;
-        }
+     @media (max-width: 768px) {
+  body {
+    align-items: flex-start;
+    padding: 10px;
+  }
 
-        #sertifikat {
-          transform: scale(0.6);
-          transform-origin: top left;
-          margin-bottom: -300px;
-        }
+  #sertifikat {
+    transform: scale(0.32);        /* ← sesuaikan scale HP */
+    transform-origin: top left;
+    margin-bottom: -540px;         /* ← sesuaikan dengan scale baru */
+  }
 
-        .btn-group {
-          margin-top: -180px;
-          padding-left: 10px;
-        }
-      }
+  .btn-group {
+    margin-top: 10px;              /* ← hapus nilai negatif besar */
+    padding-left: 10px;
+  }
+}
     </style>
   </head>
   <body>

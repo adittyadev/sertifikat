@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <title>Preview Sertifikat</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <link rel="preload" as="image" href="format.png" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -22,8 +26,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 30px;
-        font-family: "Times New Roman", Times, serif; /* ganti */
+        padding: 20px;
+        overflow-x: auto; /* supaya bisa scroll horizontal */
+        min-width: 1200px; /* paksa lebar desktop */
+        font-family: "Times New Roman", Times, serif;
       }
 
       /* ══ SERTIFIKAT CANVAS A4 Landscape ══ */
@@ -180,10 +186,41 @@
         background: #c9a227;
         color: #000;
       }
+
+      .sertifikat-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+      #sertifikat {
+        width: 1123px;
+        height: 794px;
+        flex-shrink: 0;
+      }
+
+      /* Responsive HP */
+      @media (max-width: 768px) {
+        body {
+          align-items: flex-start;
+          padding: 10px;
+        }
+
+        #sertifikat {
+          transform: scale(0.6);
+          transform-origin: top left;
+          margin-bottom: -300px;
+        }
+
+        .btn-group {
+          margin-top: -180px;
+          padding-left: 10px;
+        }
+      }
     </style>
   </head>
   <body>
-    <div id="sertifikat">
+    <div class="sertifikat-wrapper">
+        <div id="sertifikat">
       <!-- NOMOR -->
       <div class="nomor-line">
         <span id="c-nomor"></span>
@@ -238,6 +275,8 @@
         </div>
       </div>
     </div>
+      </div>
+</div>
 
     <!-- BUTTON -->
     <div class="btn-group">

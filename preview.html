@@ -7,11 +7,11 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <link rel="preload" as="image" href="format.png" crossorigin="anonymous" />
+    <link rel="preload" as="image" href="format2.png" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -22,251 +22,264 @@
       }
 
       body {
-        background: #b0b0b0;
+        background: #7a7a7a;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 20px;
-        overflow-x: auto; 
-        min-width: 1200px; 
-        font-family: "Times New Roman", Times, serif;
+        padding: 30px 20px;
+        font-family: "EB Garamond", "Times New Roman", serif;
+        min-height: 100vh;
+      }
+
+      /*
+       * A4 Landscape = 29.7cm x 21cm = 1123px x 794px @96dpi
+       * Sertifikat ditampilkan responsif di layar,
+       * tapi di-render ke 1123x794 saat download PDF.
+       *
+       * FONT 15pt → di A4 = 15/72*96 = 20px pada 1123px lebar.
+       * Dalam cqw: 20/1123*100 ≈ 1.78cqw
+       * Kita pakai 1.78cqw sebagai base font (setara 15pt di A4).
+       */
+
+      .sertifikat-outer {
+        width: min(96vw, 1123px); /* tampil maksimal 1123px (A4 asli) */
+        aspect-ratio: 1123 / 794;
+        container-type: inline-size;
+        position: relative;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
       }
 
       #sertifikat {
-        width: 1123px;
-        height: 794px;
-        background-image: url("format.png");
-        background-size: cover;
-        background-position: center;
+        width: 100%;
+        height: 100%;
+        background-image: url("format2.png");
+        background-size: 100% 100%;
         background-repeat: no-repeat;
         position: relative;
         overflow: hidden;
-        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
-        font-size: 16px;
-        font-weight: bold;
       }
 
+      /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         Semua ukuran font berbasis 1.78cqw
+         = 15pt pada lebar 1123px (A4).
+         Judul lebih besar, body = 1.78cqw.
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+      /* NOMOR — tepat di bawah "Piagam Penghargaan" di format.png */
       .nomor-line {
         position: absolute;
-        top: 245px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60%;
-        text-align: center;
-        font-size: 14px;
-        color: #222;
-        font-weight: normal;
-      }
-
-    
-      .sub-title {
-        position: absolute;
-        top: 275px;
+        top: 30%; /* ~266/794 */
         left: 50%;
         transform: translateX(-50%);
         width: 70%;
         text-align: center;
-        font-size: 18px;
-        font-weight: 900;
-        color: #000;
-        line-height: 1.5;
+        font-size: 1.6cqw; /* ~13.5pt */
+        color: #111;
+        font-weight: 400;
+        white-space: nowrap;
       }
 
-      .isian-wrap {
+      /* PEMERINTAH PROVINSI + MEMBERIKAN */
+      .sub-title {
         position: absolute;
-        top: 350px;
+        top: 33%; /* ~310/794 */
         left: 50%;
         transform: translateX(-50%);
-        width: 60%;
+        width: 80%;
+        text-align: center;
+        font-size: 1.9cqw; /* ~16pt */
+        font-weight: 700;
+        color: #000;
+        line-height: 1.6;
+      }
+
+      /* ── TABEL ISIAN ── */
+      .isian-wrap {
+        position: absolute;
+        top: 43%; /* ~397/794 — tepat di bawah sub-title */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 66%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2cqw;
       }
 
       .isian-row {
         display: grid;
-        grid-template-columns: 200px 20px 1fr;
-        align-items: center;
-        margin-bottom: 10px;
+        grid-template-columns: 28% 6% 1fr;
+        align-items: flex-end;
       }
 
       .isian-label {
-        width: 175px;
-        font-size: 18px;
-        font-weight: 900;
+        font-size: 1.78cqw; /* 15pt */
+        font-weight: 700;
         color: #000;
-        flex-shrink: 0;
+        padding-bottom: 2px;
       }
 
       .isian-colon {
-        width: 22px;
-        text-align: center;
+        font-size: 1.78cqw;
         font-weight: 700;
-        font-size: 15px;
-        flex-shrink: 0;
+        text-align: left;
+        padding-bottom: 2px;
       }
 
       .isian-value {
-        flex: 1;
-        border-bottom: 2px solid #000;
-        padding-bottom: 2px;
-        padding-left: 6px;
-        font-size: 16px;
-        font-weight: 900;
+        font-size: 1.78cqw; /* 15pt */
+        font-weight: 700;
         color: #000;
+        border-bottom: 1.5px solid #000;
+        padding: 0 0 2px 0.4cqw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-height: 2.2cqw;
       }
 
+      /* ── KETERANGAN — di tengah, di bawah isian ── */
       .keterangan {
         position: absolute;
-        top: 450px;
+        top: 58%; /* ~500/794 */
         left: 50%;
         transform: translateX(-50%);
-        width: 70%;
+        width: 74%;
         text-align: center;
-        font-size: 18px;
-        font-weight: 900;
-        color: #000;   
+        font-size: 1.78cqw; /* 15pt */
+        font-weight: 700;
+        color: #000;
         line-height: 1.7;
       }
 
+      /* ── TTD — tengah bawah, persis seperti Canva ── */
       .ttd-area {
         position: absolute;
-        bottom: 80px;
-        right: 13%;        
-        left: auto;
-        transform: none;
-        width: 250px;
+        top: 72%; /* ~572/794 — di bawah keterangan */
+        left: 75%;
+        transform: translateX(-50%);
+        width: 26%;
         text-align: center;
       }
 
       .ttd-block {
-        font-size: 16px;
+        font-size: 1.6cqw; /* ~13.5pt */
         font-weight: 600;
         color: #000;
-        line-height: 1.6;
-        white-space: nowrap;
+        line-height: 1.7;
+      }
+
+      .ttd-image {
+        display: block;
+        width: 28%;
+        height: auto;
+        margin: 0.5cqw auto;
+        object-fit: contain;
       }
 
       .ttd-name {
-        margin-top: 8px;
-        font-size: 18px;
+        font-size: 1.78cqw;
         font-weight: 700;
         text-decoration: underline;
+        margin-top: 0.2cqw;
       }
 
-     .ttd-image {
-       display: block;
-       width: 130px;
-       height: 70px;
-       margin: 8px auto;
-       object-fit: contain;
-     }
-
+      /* ── TOMBOL ── */
       .btn-group {
-        margin-top: 22px;
+        margin-top: 24px;
         display: flex;
-        gap: 10px;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
       }
 
       button {
-        padding: 11px 28px;
+        padding: 12px 34px;
         border: none;
         background: #1a3a6b;
         color: white;
-        border-radius: 7px;
+        border-radius: 8px;
         cursor: pointer;
         font-size: 15px;
         font-weight: bold;
         font-family: Arial, sans-serif;
         transition: background 0.2s;
       }
-
       button:hover {
         background: #c9a227;
         color: #000;
       }
-      
-      #sertifikat {
-        width: 1123px;
-        height: 794px;
-        flex-shrink: 0;
+
+      @media (max-width: 600px) {
+        .sertifikat-outer {
+          width: 99vw;
+        }
+        button {
+          font-size: 13px;
+          padding: 10px 18px;
+        }
       }
-
-     @media (max-width: 768px) {
-  body {
-    align-items: flex-start;
-    padding: 10px;
-  }
-
-  #sertifikat {
-    transform: scale(0.32);        
-    transform-origin: top left;
-    margin-bottom: -540px; 
-  }
-
-  .btn-group {
-    margin-top: 10px;              
-    padding-left: 10px;
-  }
-}
     </style>
   </head>
   <body>
-    <div class="sertifikat-wrapper">
-        <div id="sertifikat">
-      <!-- NOMOR -->
-      <div class="nomor-line">
-        <span id="c-nomor"></span>
-      </div>
-
-      <!-- SUB TITLE -->
-      <div class="sub-title">
-        Pemerintah Provinsi Sumatera Barat<br />
-        Memberikan Penghargaan dan Ucapan Terima Kasih Kepada :
-      </div>
-
-      <!-- DATA ISIAN -->
-      <div class="isian-wrap">
-        <div class="isian-row">
-          <span class="isian-label">Nama</span>
-          <span class="isian-colon">:</span>
-          <span class="isian-value" id="c-nama"></span>
+    <div class="sertifikat-outer">
+      <div id="sertifikat">
+        <!-- NOMOR -->
+        <div class="nomor-line">
+          <span id="c-nomor"></span>
         </div>
-        <div class="isian-row">
-          <span class="isian-label">NIP/NRP</span>
-          <span class="isian-colon">:</span>
-          <span class="isian-value" id="c-nip"></span>
+
+        <!-- SUB TITLE -->
+        <div class="sub-title">
+          Pemerintah Provinsi Sumatera Barat<br />
+          Memberikan Penghargaan dan Ucapan Terima Kasih Kepada :
         </div>
-        <div class="isian-row">
-          <span class="isian-label">Instansi/Lembaga</span>
-          <span class="isian-colon">:</span>
-          <span class="isian-value" id="c-instansi"></span>
+
+        <!-- DATA ISIAN -->
+        <div class="isian-wrap">
+          <div class="isian-row">
+            <span class="isian-label">Nama</span>
+            <span class="isian-colon">:</span>
+            <span class="isian-value" id="c-nama"></span>
+          </div>
+          <div class="isian-row">
+            <span class="isian-label">NIP/NRP</span>
+            <span class="isian-colon">:</span>
+            <span class="isian-value" id="c-nip"></span>
+          </div>
+          <div class="isian-row">
+            <span class="isian-label">Instansi/Lembaga</span>
+            <span class="isian-colon">:</span>
+            <span class="isian-value" id="c-instansi"></span>
+          </div>
         </div>
-      </div>
 
-      <!-- KETERANGAN -->
-      <div class="keterangan">
-        Atas dedikasi waktu dan energi yang diberikan, ini merupakan bagian
-        dalam
-        <br />
-        Penanganan Darurat Bencana Alam Hidrometeorogi Sumatera Barat
-        <br />
-        dari tanggal 25 November s.d 22 Desember 2025
-      </div>
+        <!-- KETERANGAN -->
+        <div class="keterangan">
+          Atas dedikasi waktu dan energi yang diberikan, ini merupakan bagian
+          penting<br />
+          dalam Penanganan Darurat Bencana Alam Hidrometeorogi Sumatera Barat<br />
+          dari tanggal 25 November s.d 22 Desember 2025
+        </div>
 
-      <!-- TTD -->
-      <!-- TTD -->
-      <div class="ttd-area">
-        <div class="ttd-block">
-          <div>Padang, 31 Desember 2025</div>
-          <div>Gubernur Sumatera Barat</div>
-
-          <!-- FOTO TANDA TANGAN -->
-          <img src="ttdd.png" alt="Tanda Tangan" class="ttd-image" />
-
-          <div class="ttd-name">Mahyeldi</div>
+        <!-- TTD — di tengah bawah -->
+        <div class="ttd-area">
+          <div class="ttd-block">
+            <div>Padang, 31 Desember 2025</div>
+            <div>Gubernur Sumatera Barat</div>
+            <img
+              src="ttdd.png"
+              alt="Tanda Tangan"
+              class="ttd-image"
+              onerror="
+                this.style.height = '3.5cqw';
+                this.style.opacity = '0';
+              "
+            />
+            <div class="ttd-name">Mahyeldi</div>
+          </div>
         </div>
       </div>
     </div>
-      </div>
-</div>
 
     <!-- BUTTON -->
     <div class="btn-group">
@@ -275,13 +288,14 @@
     </div>
 
     <script>
+      /* ── Isi data dari localStorage atau default ── */
       const data = JSON.parse(localStorage.getItem("sertifikat"));
       if (!data) {
         document.getElementById("c-nomor").innerText =
           "No : 0122/SERT-I/5400/11/PemprovSumbar/2026";
-        document.getElementById("c-nama").innerText = "ADITTYA ALYANDRA";
-        document.getElementById("c-nip").innerText = "8482364899";
-        document.getElementById("c-instansi").innerText = "kadaiudays";
+        document.getElementById("c-nama").innerText = "Adittya Alyandra";
+        document.getElementById("c-nip").innerText = "0831379271972";
+        document.getElementById("c-instansi").innerText = "BPBD Sumbar";
       } else {
         document.getElementById("c-nomor").innerText = "No : " + data.nomor;
         document.getElementById("c-nama").innerText = data.nama;
@@ -289,36 +303,55 @@
         document.getElementById("c-instansi").innerText = data.instansi;
       }
 
+      /* ── Download PDF — render ke A4 persis (1123×794px) ── */
       async function downloadPDF() {
         try {
-          const element = document.getElementById("sertifikat");
+          const el = document.getElementById("sertifikat");
+          const outer = document.querySelector(".sertifikat-outer");
 
-          // tunggu render
-          await new Promise((r) => setTimeout(r, 800));
+          /* Ukuran A4 landscape di 96dpi */
+          const W = 1123,
+            H = 794;
 
-          const canvas = await html2canvas(element, {
-            scale: 3, // lebih tajam
+          /* Paksa ukuran A4 sementara agar cqw = px A4 */
+          const prevOuterStyle = outer.getAttribute("style") || "";
+          const prevElStyle = el.getAttribute("style") || "";
+
+          outer.style.width = W + "px";
+          outer.style.height = H + "px";
+          outer.style.containerType = "size";
+          el.style.width = W + "px";
+          el.style.height = H + "px";
+
+          /* Tunggu reflow & font load */
+          await new Promise((r) => setTimeout(r, 1000));
+
+          const canvas = await html2canvas(el, {
+            scale: 3 /* 3× = 3369×2382 → tajam */,
             useCORS: true,
             allowTaint: true,
             backgroundColor: "#ffffff",
             logging: false,
+            width: W,
+            height: H,
           });
 
+          /* Kembalikan ukuran semula */
+          outer.setAttribute("style", prevOuterStyle);
+          el.setAttribute("style", prevElStyle);
+
           const imgData = canvas.toDataURL("image/jpeg", 1.0);
-
           const { jsPDF } = window.jspdf;
-
           const pdf = new jsPDF({
             orientation: "landscape",
             unit: "mm",
             format: "a4",
           });
-
           pdf.addImage(imgData, "JPEG", 0, 0, 297, 210);
           pdf.save("sertifikat.pdf");
         } catch (err) {
           console.error("ERROR PDF:", err);
-          alert("Gagal download PDF, cek console (F12)");
+          alert("Gagal download PDF. Cek console (F12).");
         }
       }
     </script>

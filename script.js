@@ -12,10 +12,9 @@ function generateNomor() {
 function kirimData() {
   const nama = document.getElementById("nama").value.trim();
   const nip = document.getElementById("nip").value.trim();
-  const instansi = document.getElementById("instansi").value.trim();
 
   // VALIDASI
-  if (!nama || !nip || !instansi) {
+  if (!nama || !nip) {
     alert("Harap lengkapi semua field!");
     return;
   }
@@ -23,7 +22,6 @@ function kirimData() {
   const data = {
     nama,
     nip,
-    instansi,
     nomor: generateNomor(),
   };
 

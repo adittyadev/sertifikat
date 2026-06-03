@@ -13,20 +13,23 @@ function kirimData() {
   const nama = document.getElementById("nama").value.trim();
   const nip = document.getElementById("nip").value.trim();
 
-  // VALIDASI
-  if (!nama || !nip) {
+  if (nama === "" || nip === "") {
     alert("Harap lengkapi semua field!");
     return;
   }
 
   const data = {
-    nama,
-    nip,
+    nama: nama,
+    nip: nip,
     nomor: generateNomor(),
   };
 
-  localStorage.setItem("sertifikat", JSON.stringify(data));
+  localStorage.setItem(
+    "sertifikat",
+    JSON.stringify(data)
+  );
 
-  // PINDAH HALAMAN
+  console.log("Data tersimpan:", data);
+
   window.location.href = "preview.html";
 }

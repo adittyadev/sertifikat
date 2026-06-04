@@ -138,45 +138,45 @@
       /* ── TTD AREA — wrapper utama ── */
 .ttd-area {
   position: absolute;
-  top: 65%;
-  left: 52%;
-  width: 44%;
-  height: 22cqw;
-  position: absolute;
+  bottom: 10%;
+  left: 0;
+  width: 100%;
+  height: 25%;
 }
 
       /* STEMPEL — kiri, menimpa sebagian TTD seperti sertifikat asli */
 .stempel-image {
   position: absolute;
-  width: 18cqw;
-  height: 18cqw;
-  object-fit: contain;
 
-  left: 55%;
-  top: 55%;
+  left: 50%;
+  bottom: 0;
 
-  transform: translate(-50%, -50%) rotate(-8deg);
+  transform: translateX(-50%);
 
-  opacity: 0.6;
+  width: 20cqw;
+  height: 20cqw;
+
+  opacity: 0.65;
 
   z-index: 1;
-  filter: contrast(110%) saturate(90%);
-}
 
+  mix-blend-mode: multiply;
+}
       /* BLOK TEKS TTD */
 .ttd-block {
   position: absolute;
-  right: 0;
+  right: 10%;
   bottom: 0;
 
   text-align: center;
 
-  z-index: 3;
+  z-index: 2;
 }
 
       .ttd-image {
         display: block;
-        width: 15cqw;       /* tanda tangan lebih besar */
+          width: 16cqw;
+  transform: rotate(-2deg);
         height: auto;
         margin: 0.3cqw auto;
         object-fit: contain;
@@ -265,28 +265,28 @@
         <!-- TTD + STEMPEL — sejajar berdampingan -->
         <div class="ttd-area">
 
-          <!-- Stempel di sebelah kiri tanda tangan -->
-          <img
-            src="stempel.png"
-            alt="Stempel"
-            class="stempel-image"
-            onerror="this.style.display='none'"
-          />
+  <!-- STEMPEL (CENTER BAWAH) -->
+  <img
+    src="stempel.png"
+    class="stempel-image"
+    onerror="this.style.display='none'"
+  />
 
-          <!-- Blok tanda tangan di sebelah kanan stempel -->
-          <div class="ttd-block">
-            <div>Padang, 31 Desember 2025</div>
-            <div>Gubernur Sumatera Barat</div>
-            <img
-              src="ttdd.png"
-              alt="Tanda Tangan"
-              class="ttd-image"
-              onerror="this.style.opacity='0'; this.style.height='4cqw';"
-            />
-            <div class="ttd-name">Mahyeldi</div>
-          </div>
+  <!-- TANDA TANGAN (KANAN BAWAH) -->
+  <div class="ttd-block">
+    <div>Padang, 31 Desember 2025</div>
+    <div>Gubernur Sumatera Barat</div>
 
-        </div>
+    <img
+      src="ttdd.png"
+      class="ttd-image"
+      onerror="this.style.opacity='0'"
+    />
+
+    <div class="ttd-name">Mahyeldi</div>
+  </div>
+
+</div>
 
       </div>
     </div>

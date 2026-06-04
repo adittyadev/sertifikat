@@ -96,7 +96,7 @@
       /* ── TABEL ISIAN ── */
       .isian-wrap {
         position: absolute;
-        top: 43%; /* ~397/794 — tepat di bawah sub-title */
+        top: 40%; /* ~397/794 — tepat di bawah sub-title */
         left: 50%;
         transform: translateX(-50%);
         width: 66%;
@@ -107,8 +107,8 @@
 
       .isian-row {
         display: grid;
-        grid-template-columns: 28% 6% 1fr;
-        align-items: flex-end;
+       grid-template-columns: 22% 4% 1fr;
+    align-items: center;
       }
 
       .isian-label {
@@ -131,16 +131,16 @@
         color: #000;
         border-bottom: 1.5px solid #000;
         padding: 0 0 2px 0.4cqw;
-        white-space: nowrap;
+        white-space: normal;
         overflow: hidden;
-        text-overflow: ellipsis;
+        text-overflow: unset;
         min-height: 2.2cqw;
       }
 
       /* ── KETERANGAN — di tengah, di bawah isian ── */
       .keterangan {
         position: absolute;
-        top: 53%; /* ~500/794 */
+        top: 60%; /* ~500/794 */
         left: 50%;
         transform: translateX(-50%);
         width: 74%;
@@ -154,10 +154,10 @@
       /* ── TTD — tengah bawah, persis seperti Canva ── */
       .ttd-area {
         position: absolute;
-        top: 70%; /* ~572/794 — di bawah keterangan */
-        left: 75%;
+        top: 73%; /* ~572/794 — di bawah keterangan */
+        left: 73%;
         transform: translateX(-50%);
-        width: 26%;
+        width: 24%;
         text-align: center;
       }
 

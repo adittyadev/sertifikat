@@ -136,48 +136,48 @@
       }
 
       /* ── TTD AREA — wrapper utama ── */
-      .ttd-area {
-        position: absolute;
-        top: 65%;
-        left: 52%;
-        width: 44%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;  /* vertikal center antara stempel & TTD */
-        justify-content: center;
-        gap: 0;
-      }
+.ttd-area {
+  position: absolute;
+  top: 65%;
+  left: 52%;
+  width: 44%;
+  height: 20cqw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
 
       /* STEMPEL — kiri, menimpa sebagian TTD seperti sertifikat asli */
-      .stempel-image {
-        width: 17cqw;
-        height: 17cqw;
-        object-fit: contain;
-        mix-blend-mode: multiply;
-        opacity: 0.9;
-        flex-shrink: 0;
-        position: relative;
-        z-index: 2;
-        margin-right: -3cqw; /* overlap sedikit ke TTD agar natural */
-      }
+.stempel-image {
+  width: 18cqw;
+  height: 18cqw;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  opacity: 0.75;
+
+  position: absolute;
+  left: 10%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+
+  z-index: 1; /* DI BELAKANG */
+}
 
       /* BLOK TEKS TTD */
-      .ttd-block {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 1.65cqw;
-        font-weight: 600;
-        color: #000;
-        line-height: 1.7;
-        text-align: center;
-        position: relative;
-        z-index: 1;
-      }
+.ttd-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  position: relative;
+  z-index: 2; /* DI DEPAN STEMPEL */
+}
 
       .ttd-image {
         display: block;
-        width: 11cqw;       /* tanda tangan lebih besar */
+        width: 15cqw;       /* tanda tangan lebih besar */
         height: auto;
         margin: 0.3cqw auto;
         object-fit: contain;

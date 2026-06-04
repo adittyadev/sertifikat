@@ -31,18 +31,8 @@
         min-height: 100vh;
       }
 
-      /*
-       * A4 Landscape = 29.7cm x 21cm = 1123px x 794px @96dpi
-       * Sertifikat ditampilkan responsif di layar,
-       * tapi di-render ke 1123x794 saat download PDF.
-       *
-       * FONT 15pt → di A4 = 15/72*96 = 20px pada 1123px lebar.
-       * Dalam cqw: 20/1123*100 ≈ 1.78cqw
-       * Kita pakai 1.78cqw sebagai base font (setara 15pt di A4).
-       */
-
       .sertifikat-outer {
-        width: min(96vw, 1123px); /* tampil maksimal 1123px (A4 asli) */
+        width: min(96vw, 1123px);
         aspect-ratio: 1123 / 794;
         container-type: inline-size;
         position: relative;
@@ -59,44 +49,38 @@
         overflow: hidden;
       }
 
-      /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         Semua ukuran font berbasis 1.78cqw
-         = 15pt pada lebar 1123px (A4).
-         Judul lebih besar, body = 1.78cqw.
-         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-
-      /* NOMOR — tepat di bawah "Piagam Penghargaan" di format.png */
+      /* NOMOR */
       .nomor-line {
         position: absolute;
-        top: 30%; /* ~266/794 */
+        top: 30%;
         left: 50%;
         transform: translateX(-50%);
         width: 70%;
         text-align: center;
-        font-size: 1.6cqw; /* ~13.5pt */
+        font-size: 1.6cqw;
         color: #111;
         font-weight: 400;
         white-space: nowrap;
       }
 
-      /* PEMERINTAH PROVINSI + MEMBERIKAN */
+      /* SUB TITLE */
       .sub-title {
         position: absolute;
-        top: 33%; /* ~310/794 */
+        top: 33%;
         left: 50%;
         transform: translateX(-50%);
         width: 80%;
         text-align: center;
-        font-size: 1.9cqw; /* ~16pt */
+        font-size: 1.9cqw;
         font-weight: 700;
         color: #000;
         line-height: 1.6;
       }
 
-      /* ── TABEL ISIAN ── */
+      /* TABEL ISIAN */
       .isian-wrap {
         position: absolute;
-        top: 42%; /* ~397/794 — tepat di bawah sub-title */
+        top: 42%;
         left: 50%;
         transform: translateX(-50%);
         width: 66%;
@@ -107,12 +91,12 @@
 
       .isian-row {
         display: grid;
-       grid-template-columns: 22% 4% 1fr;
-    align-items: center;
+        grid-template-columns: 22% 4% 1fr;
+        align-items: center;
       }
 
       .isian-label {
-        font-size: 1.78cqw; /* 15pt */
+        font-size: 1.78cqw;
         font-weight: 700;
         color: #000;
         padding-bottom: 2px;
@@ -126,7 +110,7 @@
       }
 
       .isian-value {
-        font-size: 1.78cqw; /* 15pt */
+        font-size: 1.78cqw;
         font-weight: 700;
         color: #000;
         border-bottom: 1.5px solid #000;
@@ -137,65 +121,71 @@
         min-height: 2.2cqw;
       }
 
-      /* ── KETERANGAN — di tengah, di bawah isian ── */
+      /* KETERANGAN */
       .keterangan {
         position: absolute;
-        top: 58%; /* ~500/794 */
+        top: 58%;
         left: 50%;
         transform: translateX(-50%);
         width: 74%;
         text-align: center;
-        font-size: 1.78cqw; /* 15pt */
+        font-size: 1.78cqw;
         font-weight: 700;
         color: #000;
         line-height: 1.7;
       }
 
-      .stempel-image {
-  position: absolute;
-  width: 12cqw;
-  height: auto;
-  top: -3cqw;
-  left: 50%;
-  transform: translateX(-50%);
-  mix-blend-mode: multiply;
-  opacity: 0.85;
-  pointer-events: none;
-}
-
-      /* ── TTD — tengah bawah, persis seperti Canva ── */
+      /* ── TTD AREA — wrapper utama ── */
       .ttd-area {
         position: absolute;
-        top: 70%; /* ~572/794 — di bawah keterangan */
-        left: 73%;
-        transform: translateX(-50%);
-        width: 24%;
-        text-align: center;
+        top: 68%;
+        left: 55%;          /* geser ke kanan agar di area kanan sertifikat */
+        width: 38%;
+        display: flex;
+        flex-direction: row; /* stempel | teks TTD berdampingan */
+        align-items: center;
+        gap: 1cqw;
       }
 
+      /* STEMPEL — kiri dari TTD */
+      .stempel-image {
+        width: 15cqw;       /* lebih besar dari sebelumnya */
+        height: 15cqw;
+        object-fit: contain;
+        mix-blend-mode: multiply;
+        opacity: 0.9;
+        flex-shrink: 0;
+        margin-top: 1cqw;   /* turunkan sedikit agar center dengan TTD */
+      }
+
+      /* BLOK TEKS TTD */
       .ttd-block {
-        font-size: 1.6cqw; /* ~13.5pt */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 1.6cqw;
         font-weight: 600;
         color: #000;
         line-height: 1.7;
+        text-align: center;
       }
 
       .ttd-image {
         display: block;
-        width: 40%;
+        width: 9cqw;        /* tanda tangan lebih besar */
         height: auto;
-        margin: 0.5cqw auto;
+        margin: 0.4cqw auto;
         object-fit: contain;
       }
 
       .ttd-name {
-        font-size: 1.78cqw;
+        font-size: 1.9cqw;
         font-weight: 700;
         text-decoration: underline;
         margin-top: 0.2cqw;
       }
 
-      /* ── TOMBOL ── */
+      /* TOMBOL */
       .btn-group {
         margin-top: 24px;
         display: flex;
@@ -222,19 +212,15 @@
       }
 
       @media (max-width: 600px) {
-        .sertifikat-outer {
-          width: 99vw;
-        }
-        button {
-          font-size: 13px;
-          padding: 10px 18px;
-        }
+        .sertifikat-outer { width: 99vw; }
+        button { font-size: 13px; padding: 10px 18px; }
       }
     </style>
   </head>
   <body>
     <div class="sertifikat-outer">
       <div id="sertifikat">
+
         <!-- NOMOR -->
         <div class="nomor-line">
           <span id="c-nomor"></span>
@@ -259,27 +245,31 @@
             <span class="isian-value" id="c-nip"></span>
           </div>
           <div class="isian-row">
-  <span class="isian-label">Instansi</span>
-  <span class="isian-colon">:</span>
-  <span class="isian-value" id="c-instansi"></span>
-</div>
+            <span class="isian-label">Instansi</span>
+            <span class="isian-colon">:</span>
+            <span class="isian-value" id="c-instansi"></span>
+          </div>
         </div>
 
         <!-- KETERANGAN -->
         <div class="keterangan">
-          Atas dedikasi waktu dan energi yang diberikan, ini merupakan bagian
-          penting<br />
+          Atas dedikasi waktu dan energi yang diberikan, ini merupakan bagian penting<br />
           dalam Penanganan Darurat Bencana Alam Hidrometeorogi Sumatera Barat<br />
           dari tanggal 25 November s.d 22 Desember 2025
         </div>
 
-        <!-- TTD — di tengah bawah -->
+        <!-- TTD + STEMPEL — sejajar berdampingan -->
         <div class="ttd-area">
+
+          <!-- Stempel di sebelah kiri tanda tangan -->
           <img
-  src="stempel.png"
-  alt="Stempel"
-  class="stempel-image"
-/>
+            src="stempel.png"
+            alt="Stempel"
+            class="stempel-image"
+            onerror="this.style.display='none'"
+          />
+
+          <!-- Blok tanda tangan di sebelah kanan stempel -->
           <div class="ttd-block">
             <div>Padang, 31 Desember 2025</div>
             <div>Gubernur Sumatera Barat</div>
@@ -287,14 +277,13 @@
               src="ttdd.png"
               alt="Tanda Tangan"
               class="ttd-image"
-              onerror="
-                this.style.height = '3.5cqw';
-                this.style.opacity = '0';
-              "
+              onerror="this.style.opacity='0'; this.style.height='4cqw';"
             />
             <div class="ttd-name">Mahyeldi</div>
           </div>
+
         </div>
+
       </div>
     </div>
 
@@ -305,33 +294,29 @@
     </div>
 
     <script>
-      /* ── Isi data dari localStorage atau default ── */
+      /* Isi data dari localStorage atau default */
       const data = JSON.parse(localStorage.getItem("sertifikat"));
 
-if (!data) {
-  document.getElementById("c-nomor").innerText =
-    "No : 0122/SERT-I/5400/11/PemprovSumbar/2026";
-  document.getElementById("c-nama").innerText = "Adittya Alyandra";
-  document.getElementById("c-nip").innerText = "0831379271972";
-  document.getElementById("c-instansi").innerText = "Instansi Default";
-} else {
-  document.getElementById("c-nomor").innerText = "No : " + data.nomor;
-  document.getElementById("c-nama").innerText = data.nama;
-  document.getElementById("c-nip").innerText = data.nip;
-  document.getElementById("c-instansi").innerText = data.instansi;
-}
+      if (!data) {
+        document.getElementById("c-nomor").innerText = "No : 0122/SERT-I/5400/11/PemprovSumbar/2026";
+        document.getElementById("c-nama").innerText = "Adittya Alyandra";
+        document.getElementById("c-nip").innerText = "0831379271972";
+        document.getElementById("c-instansi").innerText = "Instansi Default";
+      } else {
+        document.getElementById("c-nomor").innerText = "No : " + data.nomor;
+        document.getElementById("c-nama").innerText = data.nama;
+        document.getElementById("c-nip").innerText = data.nip;
+        document.getElementById("c-instansi").innerText = data.instansi;
+      }
 
-      /* ── Download PDF — render ke A4 persis (1123×794px) ── */
+      /* Download PDF — render ke A4 persis (1123×794px) */
       async function downloadPDF() {
         try {
           const el = document.getElementById("sertifikat");
           const outer = document.querySelector(".sertifikat-outer");
 
-          /* Ukuran A4 landscape di 96dpi */
-          const W = 1123,
-            H = 794;
+          const W = 1123, H = 794;
 
-          /* Paksa ukuran A4 sementara agar cqw = px A4 */
           const prevOuterStyle = outer.getAttribute("style") || "";
           const prevElStyle = el.getAttribute("style") || "";
 
@@ -341,11 +326,10 @@ if (!data) {
           el.style.width = W + "px";
           el.style.height = H + "px";
 
-          /* Tunggu reflow & font load */
           await new Promise((r) => setTimeout(r, 1000));
 
           const canvas = await html2canvas(el, {
-            scale: 3 /* 3× = 3369×2382 → tajam */,
+            scale: 3,
             useCORS: true,
             allowTaint: true,
             backgroundColor: "#ffffff",
@@ -354,7 +338,6 @@ if (!data) {
             height: H,
           });
 
-          /* Kembalikan ukuran semula */
           outer.setAttribute("style", prevOuterStyle);
           el.setAttribute("style", prevElStyle);
 

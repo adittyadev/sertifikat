@@ -6,7 +6,7 @@ function generateNomor() {
   const no = String(counter).padStart(4, "0");
   const year = new Date().getFullYear();
 
-  return `564/${no}/5400/11/PemprovSumbar/${year}`;
+  return `90.1.2/564/BPBD/${no}/V/${year}`;
 }
 
 function kirimData() {

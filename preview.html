@@ -141,38 +141,37 @@
   top: 65%;
   left: 52%;
   width: 44%;
-  height: 20cqw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 22cqw;
   position: absolute;
 }
 
       /* STEMPEL — kiri, menimpa sebagian TTD seperti sertifikat asli */
 .stempel-image {
+  position: absolute;
   width: 18cqw;
   height: 18cqw;
   object-fit: contain;
-  mix-blend-mode: multiply;
-  opacity: 0.75;
 
-  position: absolute;
-  left: 10%;
-  top: 40%;
-  transform: translate(-50%, -50%);
+  left: 55%;
+  top: 55%;
 
-  z-index: 1; /* DI BELAKANG */
+  transform: translate(-50%, -50%) rotate(-8deg);
+
+  opacity: 0.6;
+
+  z-index: 1;
+  filter: contrast(110%) saturate(90%);
 }
 
       /* BLOK TEKS TTD */
 .ttd-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
   text-align: center;
 
-  position: relative;
-  z-index: 2; /* DI DEPAN STEMPEL */
+  z-index: 3;
 }
 
       .ttd-image {

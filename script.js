@@ -1,5 +1,5 @@
 function generateNomor() {
-  let counter = parseInt(localStorage.getItem("cert_counter")) || 118;
+  let counter = parseInt(localStorage.getItem("cert_counter")) || 0;
   counter++;
   localStorage.setItem("cert_counter", counter);
 

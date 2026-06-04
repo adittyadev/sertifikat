@@ -290,16 +290,19 @@
     <script>
       /* ── Isi data dari localStorage atau default ── */
       const data = JSON.parse(localStorage.getItem("sertifikat"));
-      if (!data) {
-        document.getElementById("c-nomor").innerText =
-          "No : 0122/SERT-I/5400/11/PemprovSumbar/2026";
-        document.getElementById("c-nama").innerText = "Adittya Alyandra";
-        document.getElementById("c-nip").innerText = "0831379271972";
-      } else {
-        document.getElementById("c-nomor").innerText = "No : " + data.nomor;
-        document.getElementById("c-nama").innerText = data.nama;
-        document.getElementById("c-nip").innerText = data.nip;
-      }
+
+if (!data) {
+  document.getElementById("c-nomor").innerText =
+    "No : 0122/SERT-I/5400/11/PemprovSumbar/2026";
+  document.getElementById("c-nama").innerText = "Adittya Alyandra";
+  document.getElementById("c-nip").innerText = "0831379271972";
+  document.getElementById("c-instansi").innerText = "Instansi Default";
+} else {
+  document.getElementById("c-nomor").innerText = "No : " + data.nomor;
+  document.getElementById("c-nama").innerText = data.nama;
+  document.getElementById("c-nip").innerText = data.nip;
+  document.getElementById("c-instansi").innerText = data.instansi;
+}
 
       /* ── Download PDF — render ke A4 persis (1123×794px) ── */
       async function downloadPDF() {

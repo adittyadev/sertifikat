@@ -12,8 +12,9 @@ function generateNomor() {
 function kirimData() {
   const nama = document.getElementById("nama").value.trim();
   const nip = document.getElementById("nip").value.trim();
+  const instansi = document.getElementById("instansi").value.trim();
 
-  if (nama === "" || nip === "") {
+  if (nama === "" || nip === "" || instansi === "") {
     alert("Harap lengkapi semua field!");
     return;
   }
@@ -21,15 +22,11 @@ function kirimData() {
   const data = {
     nama: nama,
     nip: nip,
+    instansi: instansi,
     nomor: generateNomor(),
   };
 
-  localStorage.setItem(
-    "sertifikat",
-    JSON.stringify(data)
-  );
-
-  console.log("Data tersimpan:", data);
+  localStorage.setItem("sertifikat", JSON.stringify(data));
 
   window.location.href = "preview.html";
 }
